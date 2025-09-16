@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Learning Hub - Master Excel with AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.0/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Header -->
+    <header class="gradient-bg text-white py-4 px-4 shadow-xl">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">Excel Learning Hub</h1>
+                    <p class="text-lg opacity-90">Master Excel with AI-Powered Guidance</p>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="bg-white/20 px-4 py-2 rounded-full text-sm">Powered by AI</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Column: Inputs -->
+            <div class="lg:col-span-1">
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Analyze Your Excel Files
+                    </h2>
+                    
+                    <!-- File Upload Area -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Upload a File (Optional)</label>
+                        <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded-xl py-4 px-8 text-center hover:border-purple-500 transition-colors cursor-pointer">
+                            <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-gray-600 mb-2">Drop files here or click to browse</p>
+                            <p class="text-sm text-gray-500">Supports: .xlsx, .csv, images, etc.</p>
+                            <input type="file" id="fileInput" class="hidden" accept=".xlsx,.xls,.csv,.pdf,image/*">
+                        </div>
+                        <div id="fileInfo" class="mt-4 hidden">
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span id="fileName" class="text-sm font-medium text-gray-700"></span>
+                                </div>
+                                <button id="removeFile" class="text-red-500 hover:text-red-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- File Preview Area Re-added -->
+                            <!-- <div id="filePreview" class="mt-3"></div> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Query Input -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Your Question</label>
+                        <textarea id="userQuery" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all" placeholder="E.g., How do I use VLOOKUP?"></textarea>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                         <!-- API Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">AI Provider</label>
+                            <select id="apiProvider" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                <option value="gemini">Google Gemini</option>
+                                <option value="groq">Groq</option>
+                            </select>
+                        </div>
+                        <!-- Response Detail Selection -->
+                        <div>
+                             <label class="block text-sm font-medium text-gray-700 mb-2">Response Detail</label>
+                             <select id="responseDetail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                 <option value="concise">Concise</option>
+                                 <option value="detailed">Detailed</option>
+                             </select>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button id="generateBtn" class="w-full gradient-bg text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Generate Guide
+                    </button>
+
+                    <!-- Loading and Error States -->
+                    <div id="loadingState" class="hidden mt-6"><div class="flex items-center justify-center"><div class="loader mr-3"></div><span class="text-gray-600">Generating...</span></div></div>
+                    <div id="errorMessage" class="hidden mt-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"></div>
+
+                </div>
+            </div>
+            
+            <!-- Right Column: Generated Content -->
+            <div id="output-container" class="lg:col-span-1 glass-effect rounded-2xl p-6 shadow-xl output-container">
+                <div id="generatedContent" class="generated-content">
+                    <div class="text-center text-gray-500 pt-16">
+                        <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" ></path></svg>
+                         <h3 class="mt-2 text-lg font-medium text-gray-600">Your AI guide will appear here</h3>
+                         <p class="mt-1 text-sm text-gray-500">Ask a question and click "Generate Guide".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Notification -->
+    <div id="notification" class="floating-notification">
+        <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+            <div class="flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span id="notificationText">Success!</span></div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+    
+</body>
+</html>
+

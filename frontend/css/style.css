@@ -1,0 +1,182 @@
+* { 
+    font-family: 'Inter', sans-serif; 
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* New class for the scrollable right-hand column */
+.output-container {
+    height: calc(100vh - 120px); /* Adjust height as needed */
+    overflow-y: auto;
+    position: sticky;
+    top: 2rem; /* Matches the gap from the top */
+}
+
+.loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.file-drop-active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-color: #667eea !important;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-content.active {
+    max-height: 2000px;
+    transition: max-height 0.5s ease-in;
+}
+
+/* Generated content styles */
+.generated-content h1 { 
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    font-weight: 700;
+    margin-bottom: 1rem; /* 16px */
+    margin-top: 1.5rem; /* 24px */
+    color: rgb(31 41 55);
+}
+
+.generated-content h2 { 
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    font-weight: 600;
+    margin-bottom: 0.75rem; /* 12px */
+    margin-top: 1.25rem; /* 20px */
+    color: rgb(55 65 81);
+}
+
+.generated-content h3 { 
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500;
+    margin-bottom: 0.5rem; /* 8px */
+    margin-top: 1rem; /* 16px */
+    color: rgb(75 85 99);
+}
+
+.generated-content p { 
+    margin-bottom: 0.75rem; /* 12px */
+    color: rgb(75 85 99);
+    line-height: 1.625;
+}
+
+.generated-content ul { 
+    list-style-type: disc;
+    margin-left: 1.5rem; /* 24px */
+    margin-bottom: 0.75rem; /* 12px */
+}
+.generated-content ul li::marker {
+    color: rgb(75 85 99);
+}
+
+
+.generated-content ol { 
+    list-style-type: decimal;
+    margin-left: 1.5rem; /* 24px */
+    margin-bottom: 0.75rem; /* 12px */
+}
+.generated-content ol li, .generated-content ul li {
+    padding-left: 0.375rem; /* 6px */
+    margin-bottom: 0.25rem; /* 4px */
+}
+
+.generated-content li { 
+    color: rgb(75 85 99);
+}
+
+.generated-content code { 
+    background-color: rgb(243 244 246);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    color: #a855f7;
+}
+
+.generated-content pre { 
+    background-color: rgb(17 24 39);
+    color: rgb(243 244 246);
+    padding: 1rem; /* 16px */
+    border-radius: 0.5rem; /* 8px */
+    overflow-x: auto;
+    margin-bottom: 1rem; /* 16px */
+}
+
+.generated-content table { 
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem; /* 16px */
+}
+
+.generated-content th { 
+    background-color: rgb(243 244 246);
+    border: 1px solid rgb(209 213 219);
+    padding: 0.5rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.generated-content td { 
+    border: 1px solid rgb(209 213 219);
+    padding: 0.5rem 1rem;
+}
+
+.generated-content blockquote { 
+    border-left-width: 4px;
+    border-color: #a855f7;
+    padding-left: 1rem; /* 16px */
+    font-style: italic;
+    margin-top: 1rem; /* 16px */
+    margin-bottom: 1rem; /* 16px */
+}
+
+.generated-content img { 
+    border-radius: 0.5rem; /* 8px */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    margin-top: 1rem; /* 16px */
+    margin-bottom: 1rem; /* 16px */
+    max-width: 100%;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 20px 0;
+}
+
+.floating-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.floating-notification.show {
+    transform: translateX(0);
+}
